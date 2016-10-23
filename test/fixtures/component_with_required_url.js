@@ -3,7 +3,7 @@ var test = String.raw`
   
   export class TestComponent implements IComponentOptions {
     controller = TestController;
-    templateUrl = './some/path/to/file\'.html';
+    templateUrl = require('./some/path/to/file.html');
   }
   class TestController { }
 `;

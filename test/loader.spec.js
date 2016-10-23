@@ -4,61 +4,37 @@ var loader = require("../index.js");
 var fixtures = require("./fixtures");
 
 describe("loader", function() {
-  it("Should convert html and style file strings to require()s", function(){
+  it("Should convert html file strings to require()", function(){
 
-    loader.call({}, fixtures.simpleAngular2TestComponentFileStringSimple)
+    loader.call({}, fixtures.simpleAngular1TestComponentFileStringSimple)
       .should
       .be
       .eql(`
-  import {Component} from '@angular/core';
-
-  @Component({
-    selector: 'test-component',
-    template: require('./some/path/to/file.html'),
-    styles: [require('./app/css/styles.css')]
-  })
-  export class TestComponent {}
+  import { IComponentOptions } from 'angular';
+  
+  export class TestComponent implements IComponentOptions {
+    controller = TestController;
+    templateUrl = require('./some/path/to/file.html');
+  }
+  class TestController { }
 `
       )
 
   });
 
-  it("Should convert html and style file strings to require()s regardless of inner quotes", function(){
+  it("Should convert html file strings to require() regardless of inner quotes", function(){
 
     loader.call({}, fixtures.componentWithQuoteInUrls)
       .should
       .be
       .eql(String.raw`
-  import {Component} from '@angular/core';
-
-  @Component({
-    selector: 'test-component',
-    template: require('./some/path/to/file\'.html'),
-    styles: [require('./app/css/\"styles\".css\\')]
-  })
-  export class TestComponent {}
-`
-      )
-
-  });
-
-  it("Should convert html and multiple style file strings to require()s", function(){
-
-    loader.call({}, fixtures.componentWithMultipleStyles)
-      .should
-      .be
-      .eql(`
-  import {Component} from '@angular/core';
-
-  @Component({
-    selector: 'test-component',
-    template: require('./some/path/to/file.html'),
-    styles: [
-      require('./app/css/styles.css'),
-      require('./app/css/more-styles.css')
-    ]
-  })
-  export class TestComponent {}
+  import { IComponentOptions } from 'angular';
+  
+  export class TestComponent implements IComponentOptions {
+    controller = TestController;
+    templateUrl = require('./some/path/to/file\'.html');
+  }
+  class TestController { }
 `
       )
 
@@ -72,10 +48,10 @@ describe("loader", function() {
   });
 
   it("Should convert partial string match requires", function() {
-    loader.call({}, `templateUrl: './index/app.html'`)
+    loader.call({}, `templateUrl = './index/app.html'`)
       .should
       .be
-      .eql(`template: require('./index/app.html')`);
+      .eql(`templateUrl = require('./index/app.html')`);
   });
 
   it("Should handle the absense of proper relative path notation", function() {
@@ -83,34 +59,42 @@ describe("loader", function() {
       .should
       .be
       .eql(`
-  import {Component} from '@angular/core';
-
-  @Component({
-    selector: 'test-component',
-    template: require('./file.html'),
-    styles: [require('./styles.css')]
-  })
-  export class TestComponent {}
+  import { IComponentOptions } from 'angular';
+  
+  export class TestComponent implements IComponentOptions {
+    controller = TestController;
+    templateUrl = require('./file.html');
+  }
+  class TestController { }
 `
       );
   });
 
-  it("Should convert html and style file strings to require()s regardless of spacing", function(){
+  it("Should convert html file strings to require() regardless of spacing", function(){
 
-    loader.call({}, fixtures.componentWithSpacing)
+    loader.call({}, fixtures.componentWithNoSpacing)
       .should
       .be
       .eql(`
-  import {Component} from '@angular/core';
-
-  @Component({
-    selector : 'test-component',
-    template: require('./some/path/to/file.html'),
-    styles: [require('./app/css/styles.css')]
-  })
-  export class TestComponent {}
+  import { IComponentOptions } from 'angular';
+  
+  export class TestComponent implements IComponentOptions {
+    controller = TestController;
+    templateUrl =require('./some/path/to/file.html');
+  }
+  class TestController { }
 `
       )
+
+  });
+
+
+  it("Should return original source if url already required", function(){
+
+    loader.call({}, fixtures.componentWithRequiredUrl)
+      .should
+      .be
+      .eql(fixtures.componentWithRequiredUrl)
 
   });
 

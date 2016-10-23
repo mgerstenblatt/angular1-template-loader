@@ -1,12 +1,11 @@
 var componentWithoutRelativePeriodSlash = `
-  import {Component} from '@angular/core';
-
-  @Component({
-    selector: 'test-component',
-    templateUrl: 'file.html',
-    styleUrls: ['styles.css']
-  })
-  export class TestComponent {}
+  import { IComponentOptions } from 'angular';
+  
+  export class TestComponent implements IComponentOptions {
+    controller = TestController;
+    templateUrl = 'file.html';
+  }
+  class TestController { }
 `;
 
 module.exports = componentWithoutRelativePeriodSlash;

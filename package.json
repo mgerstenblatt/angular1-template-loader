@@ -1,7 +1,7 @@
 {
-  "name": "angular2-template-loader",
-  "version": "0.5.0",
-  "description": "Angular2 webpack loader that inlines your angular2 templates and stylesheets into angular components.  ",
+  "name": "angular1-template-loader",
+  "version": "0.1.0",
+  "description": "Backport of the Angulars webpack loader that inlines your angular templates into angular components.  ",
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec",
@@ -12,21 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheLarkInn/angular2-template-loader.git"
+    "url": "git+https://github.com/christianacca/angular1-template-loader.git"
   },
   "keywords": [
-    "angular2",
+    "angular1",
     "webpack",
     "angularjs",
     "loader",
-    "angular2-loader"
+    "angular1-loader"
   ],
-  "author": "Sean Larkin",
+  "author": "Christian Crowhurst",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TheLarkInn/angular2-template-loader/issues"
+    "url": "https://github.com/christianacca/angular1-template-loader/issues"
   },
-  "homepage": "https://github.com/TheLarkInn/angular2-template-loader#readme",
+  "homepage": "https://github.com/christianacca/angular1-template-loader#readme",
   "devDependencies": {
     "codecov": "^1.0.1",
     "istanbul": "^0.4.3",
