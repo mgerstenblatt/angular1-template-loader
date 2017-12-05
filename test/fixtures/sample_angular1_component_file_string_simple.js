@@ -1,11 +1,8 @@
 var simpleAngular1TestComponentFileStringSimple = `
-  import { IComponentOptions } from 'angular';
-  
-  export class TestComponent implements IComponentOptions {
-    controller = TestController;
-    templateUrl = './some/path/to/file.html';
-  }
-  class TestController { }
+  angular.module('someModule', [])
+    .component('someComponent', {
+      templateUrl: 'some/path/to/a/file.html'
+  });
 `;
 
 module.exports = simpleAngular1TestComponentFileStringSimple;
