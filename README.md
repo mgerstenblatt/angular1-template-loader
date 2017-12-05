@@ -41,36 +41,27 @@ Here is an example markup of the `webpack.config.js`, which chains the `angular1
 module: {
   rules: [
     {
-      test: /\.ts$/,
-      loaders: ['awesome-typescript-loader', 'angular1-template-loader'],
-      exclude: [/\.(spec|e2e)\.ts$/]
+        test: /\.js$/,
+        use: [
+            {
+                loader: 'babel-loader',
+                options: { presets: ['env'] }
+            },
+            {
+                loader: 'angular1-template-loader'
+            }
+        ],
+        exclude: /node_modules/,
     },
-    { 
-      test: /\.html$/, 
-      loaders: ['ngtemplate?relativeTo=/src/', 'html']
-    }
+    {
+        test: /\.html$/,
+        loader: 'html-loader'
+    },
   ]
 }
 ```
 
-### Awesome Typescript Loader
-When using `awesome-typescript-loader` to load your typescript files you have to set the `useWebpackText` property to `true`.
-Otherwise the `angular1-template-loader` is not able to chain into it.
-
-Here is an example markup (`tsconfig.json`)
-```js
-{
-  "compilerOptions": {
-    ...
-  },
-  "awesomeTypescriptLoaderOptions": {
-    ...
-    "useWebpackText": true // Allows other loaders to be chained to awesome-typescript-loader.
-  },
-}
-```
-
 ### How does it work
-The `angular1-template-loader` searches for `templateUrl`  declarations inside of the Angular 1 Component metadata and replaces the paths with the corresponding `require` statement.
+The `angular1-template-loader` searches for `templateUrl`  declarations inside of the Angular 1 Component and route metadata and replaces the paths with the corresponding `require` statement.
 
 The generated `require` statements will be handled by the given loader for `.html` and `.js` files.
