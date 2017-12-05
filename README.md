@@ -7,7 +7,6 @@ This is a backport of the [angular2-template-loader](https://github.com/TheLarkI
 - [Installation](#installation)
 - [Requirements](#requirements)
 - [Example markup](#example-markup)
-- [Awesome Typescript Loader](#awesome-typescript-loader)
 - [How does it work](#how-does-it-work)
 
 ### Installation
