@@ -1,5 +1,5 @@
 # angular1-template-loader
-Chain-to loader for webpack that inlines all html in angular 1 components. 
+Loader for webpack that inlines all html in angular 1 components and routes. 
 
 This is a backport of the [angular2-template-loader](https://github.com/TheLarkInn/angular2-template-loader)
 
