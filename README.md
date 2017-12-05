@@ -13,10 +13,16 @@ This is a backport of the [angular2-template-loader](https://github.com/TheLarkI
 Install the webpack loader from [npm](https://www.npmjs.com/package/angular1-template-loader).
 - `npm install angular1-template-loader --save-dev`
 
-Chain the `angular1-template-loader` to your currently used typescript loader.
+Chain the `angular1-template-loader` to your currently used js loader.
 
 ```js
-loaders: ['awesome-typescript-loader', 'angular1-template-loader'],
+    {
+        loader: 'babel-loader',
+        options: { presets: ['env'] }
+    },
+    {
+        loader: 'angular1-template-loader'
+    }
 ```
 
 ### Requirements
